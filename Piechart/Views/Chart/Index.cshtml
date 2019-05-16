@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<div id="Barchart"></div>
+
+@section scripts
+{
+    <script src="~/Scripts/c3.min.js"></script>
+    <script src="~/Scripts/d3.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/Chart/BarChart",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    successFunc(response);
+                }
+            });
+
+            function successFunc(jsondata) {
+                var MonthYr = [];
+                jsondata.forEach(function (e) {
+                    MonthYr.push(e.MonthYr);
+                });
+
+                var chart = c3.generate({
+                    bindto: '#Barchart',
+                    data: {
+                        json: jsondata,
+                        keys: {
+                            value: ['Male', 'Female', 'Others']
+                        },
+                        columns: ['Male', 'Female', 'Others'],
+                        type: 'pie',
+                        groups: [
+                            ['Male', 'Female', 'Others']
+                        ],
+                        types: {
+                            Male: 'area-spline',
+                            Female: 'area-spline',
+                            Others: 'area-spline'
+                        },
+                    },
+                    axis: {
+                        x: {
+                            type: 'category',
+                            categories: MonthYr,
+                            tick: {
+                                rotate: 50
+                            }
+                        }
+                    },
+                    tooltip: {
+                        format: {
+                            title: function () { return 'Details' },
+                            value: function (value, ratio, id) {
+                                var format = d3.format();
+                                return format(value);
+                            }
+                        }
+                    },
+                    color: {
+                        pattern: ['#FF0000', '#15C39A', '#293955']
+                    }
+                });
+            }
+        });
+
+    </script>
+
+
+}

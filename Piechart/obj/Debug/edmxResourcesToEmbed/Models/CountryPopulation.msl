@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CSharpCornerModelStoreContainer" CdmEntityContainer="CSharpCornerEntities">
+    <EntitySetMapping Name="Populations">
+      <EntityTypeMapping TypeName="CSharpCornerModel.Population">
+        <MappingFragment StoreEntitySet="Population">
+          <ScalarProperty Name="MonthAndYear" ColumnName="MonthAndYear" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="FeMale" ColumnName="FeMale" />
+          <ScalarProperty Name="Male" ColumnName="Male" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
